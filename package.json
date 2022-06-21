@@ -1,0 +1,52 @@
+{
+  "name": "remote-control",
+  "version": "1.0.0",
+  "description": "This app is to remote control backend using `RobotJS` library and websocket",
+  "private": true,
+  "scripts": {
+    "start": "webpack --mode production && node dist/bundle.js",
+    "start:dev": "ts-node ./index.ts",
+    "dev": "nodemon ./index.ts -w",
+    "lint": "eslint . --ext .ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Diluks93/remote-control.git"
+  },
+  "keywords": [
+    "rsschool",
+    "diluks",
+    "robotJS",
+    "websocket",
+    "typescript",
+    "remote-control"
+  ],
+  "author": "diluks93 <mr.ilyukovich@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Diluks93/remote-control/issues"
+  },
+  "homepage": "https://github.com/Diluks93/remote-control#readme",
+  "devDependencies": {
+    "@types/node": "^17.0.43",
+    "@types/ws": "^8.5.3",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "nodemon": "^2.0.16",
+    "ts-loader": "^9.3.0",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "eslint": "^8.18.0",
+    "jimp": "^0.16.1",
+    "prettier": "^2.7.1",
+    "robotjs": "^0.6.0",
+    "ws": "^8.8.0"
+  }
+}

@@ -105,3 +105,11 @@ dist
 
 # IDE
 .vscode
+
+# System Files
+.DS_Store
+Thumbs.db
+[Dd]esktop.ini
+
+# Logs
+npm-debug.log
