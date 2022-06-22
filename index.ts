@@ -1,4 +1,4 @@
-import { WebSocketServer } from 'ws';
+import { WebSocketServer, createWebSocketStream } from 'ws';
 import { EOL } from 'os';
 
 import { httpServer } from './src/http_server/index';
@@ -15,10 +15,14 @@ const wss = new WebSocketServer({ port: 8080 });
 
 wss.on('connection', (ws) => {
   process.stdout.write(`Connection accepted ${EOL}`);
-  ws.on('message', (data) => {
-    const controller = new Controller(data, new Navigate(), new Figure());
+  const duplex = createWebSocketStream(ws, { encoding: 'utf8', decodeStrings: false });
+  duplex.on('data', (chunk) => {
+    const controller = new Controller(chunk, new Navigate(), new Figure());
     controller.init();
     const { x, y } = controller.getPosition();
-    ws.send(`${data} ${x},${y}`);
+    duplex.write(`${chunk} ${x},${y}`);
+  });
+  ws.on('close', () => {
+    process.stdout.write(`Connection destroyed ${EOL}`);
   });
 });
