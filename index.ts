@@ -2,7 +2,9 @@ import { WebSocketServer } from 'ws';
 import { EOL } from 'os';
 
 import { httpServer } from './src/http_server/index';
-import { Navigate } from './src/robot';
+import { Controller } from './src/controller';
+import { Figure } from './src/figure';
+import { Navigate } from './src/navigate';
 
 const HTTP_PORT = 3000;
 
@@ -14,9 +16,9 @@ const wss = new WebSocketServer({ port: 8080 });
 wss.on('connection', (ws) => {
   process.stdout.write(`Connection accepted ${EOL}`);
   ws.on('message', (data) => {
-    const navigate = new Navigate(data);
-    navigate.init();
-    const { x, y } = navigate.getPosition();
+    const controller = new Controller(data, new Navigate(), new Figure());
+    controller.init();
+    const { x, y } = controller.getPosition();
     ws.send(`${data} ${x},${y}`);
   });
 });

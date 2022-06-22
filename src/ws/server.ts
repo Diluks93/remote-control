@@ -1,16 +1,8 @@
-import WebSocket, { WebSocketServer } from 'ws';
+import WebSocket, { createWebSocketStream } from 'ws';
 
-new WebSocket('ws:/localhost');
-const wss = new WebSocketServer({ port: 8080 });
+const ws = new WebSocket('ws:/localhost:8080');
 
-wss.on('connection', (ws: WebSocket) => {
-  ws.on('message', (data: string) => {
-    process.stdout.write(data);
-  });
+const duplex = createWebSocketStream(ws, { encoding: 'utf8' });
 
-  ws.send('something');
-});
-
-wss.on('close', () => {
-  process.stdout.write('server closed');
-});
+duplex.pipe(process.stdout);
+process.stdin.pipe(duplex);
