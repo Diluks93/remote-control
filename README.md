@@ -12,5 +12,5 @@ This app is to remote control backend using RobotJS library and websocket
 
 ## Usage
 
-  1. `npm run start` - to run application
+  1. `npm run start:dev` - to run application
   2. open http://localhost:3000
